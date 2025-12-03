@@ -8,6 +8,13 @@ PluginSettings {
 
     pluginId: "worldClock"
 
+    ToggleSetting {
+        settingKey: "use24Hour"
+        label: "24-Hour Format"
+        description: "Use 24-hour time format instead of 12-hour AM/PM"
+        defaultValue: true
+    }
+
     ListSettingWithInput {
         settingKey: "timezones"
         label: "Timezones"

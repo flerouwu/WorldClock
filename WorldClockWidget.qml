@@ -9,6 +9,7 @@ PluginComponent {
     id: root
 
     property var timezones: []
+    property var use24Hour: true
     property var pluginService: null
     property bool isLoading: true
 
@@ -16,6 +17,7 @@ PluginComponent {
         if (pluginService && pluginService.loadPluginData) {
             const saved = pluginService.loadPluginData("worldClock", "timezones", [])
             timezones = (saved && Array.isArray(saved)) ? saved : []
+            use24Hour = pluginService.loadPluginData("worldClock", "use24Hour", true)
             isLoading = false
         }
     }
@@ -89,7 +91,7 @@ PluginComponent {
 
                         try {
                             if (TimezoneUtils.isMomentAvailable() && modelData && modelData.timezone) {
-                                timeString = TimezoneUtils.getTimeInTimezone(modelData.timezone, true)
+                                timeString = TimezoneUtils.getTimeInTimezone(modelData.timezone, root.use24Hour)
                             } else {
                                 timeString = "ERR"
                             }
